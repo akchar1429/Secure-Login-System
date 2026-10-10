@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SecureSpace{% endblock %}
+{% block heading %}You're signed in.{% endblock %}
+{% block subheading %}This page is protected by a server-side authentication check.{% endblock %}
+{% block content %}
+<div class="auth-card dashboard-card">
+  <div class="success-mark">✓</div>
+  <p class="eyebrow centered">AUTHENTICATION SUCCESSFUL</p>
+  <h2 class="welcome">Welcome, {{ username }}.</h2>
+  <p class="dashboard-copy">You have accessed the protected dashboard. Your session expires after 30 minutes of its configured lifetime.</p>
+  <div class="status-list">
+    <div><span class="status-dot"></span><span>Account session active</span><strong>ON</strong></div>
+    <div><span class="status-dot"></span><span>Password storage</span><strong>HASHED</strong></div>
+    <div><span class="status-dot"></span><span>CSRF protection</span><strong>ON</strong></div>
+  </div>
+  <form method="post" action="{{ url_for('logout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="secondary-btn" type="submit">Log out <span aria-hidden="true">↗</span></button>
+  </form>
+</div>
+{% endblock %}

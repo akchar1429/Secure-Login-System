@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Secure Login System demonstration project">
+  <title>{% block title %}Secure Login System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-icon">S</span> SecureSpace</a>
+    <span class="topbar-note">SECURE ACCESS PORTAL</span>
+  </header>
+  <main class="page">
+    <section class="intro">
+      <div class="eyebrow"><span class="pulse"></span> YOUR ACCOUNT, PROTECTED</div>
+      <h1>{% block heading %}Security starts here.{% endblock %}</h1>
+      <p>{% block subheading %}A simple demonstration of secure authentication practices.{% endblock %}</p>
+    </section>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="messages" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <footer><span>● Encrypted password storage</span><span>● Protected sessions</span><span>● CSRF protection</span></footer>
+  </main>
+</body>
+</html>
